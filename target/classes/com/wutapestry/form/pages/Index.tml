@@ -1,0 +1,104 @@
+<html t:type="layout" title="Index | app" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
+
+<!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
+
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="row my-3">
+    <div class="col-4">
+        <h4>${app_title}</h4>
+        <hr>
+        </hr>
+        <t:form t:id="todo">
+            <t:textfield t:id="title" placeholder="To Do" validate="required" />
+            <t:textarea t:id="description" placeholder="Description" class="my-2" validate="required" />
+            <t:select t:id="prioritySelect" model="['Low','Medium','High']" value="selectedPriority"
+                validate="required">
+            </t:select>
+            <t:submit class="btn btn-large btn-dark my-2" value="Create" />
+        </t:form>
+    </div>
+    <div class="col-8">
+        <h4>${app_todo}</h4>
+        <hr>
+        </hr>
+        <div class="todo" style="height:30vh! important; overflow-y: scroll!important;">
+            <t:unless test="${!todoList.empty}">
+                <div>
+                    <!-- Content to display when the ArrayList is not empty -->
+                    <p>The pending tasks will be shown here...</p>
+                </div>
+            </t:unless>
+
+            <t:loop source="todoList" value="dueTask">
+                <div class="card my-2" style="border-left: 4px solid ${dueTask.color} !important">
+                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                    <div class="card-body">
+                        <h6 class="card-title">${dueTask.title}</h6>
+                        <p class="card-text">${dueTask.description}</p>
+                    </div>
+
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-7">
+                                <div style="display:table;vertical-align: middle; margin-top:3px;">
+                                    <span><small class="text-muted">Created At: ${dueTask.dateCreated}</small></span> |
+                                    <span><small class="text-muted">Priority: ${dueTask.priority}</small></span>
+                                </div>
+                            </div>
+
+                            <div class="col-5">
+                                <div class="d-flex">
+                                    <div>
+
+                                        <!-- <input type="submit" t:action="onDeleteTask(${dueTask.id})" value="Submit" /> -->
+
+
+
+                                            <!-- <t:textfield t:id="taskid" t:value="dueTask.id"/> -->
+                                        <button class="btn-sm btn-success" value="Mark As Done">Mark As Done</button>
+                                        <button class="btn-sm btn-danger" style="margin-left:5px">Delete Task</button>
+
+
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </t:loop>
+
+        </div>
+        <div class="done my-3 " style="height:40vh! important; overflow-y: scroll!important">
+            <h4>${app_done}</h4>
+            <hr>
+            </hr>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="row">
+    <t:zone t:id="middlezone" class="col-12"></t:zone>
+</div> -->
+
+<!-- <div class="row">
+    <div class="col-12">
+        <h2>Ajax link</h2>
+        <p>Click the bottom link to update just the middle column with Ajax call with event <code>ajax</code></p>
+        <p><t:eventlink event="ajax" zone="middlezone" class="btn btn-primary">Ajax &raquo;</t:eventlink></p>
+    </div>
+</div> -->
+
+<!-- <t:block t:id="block">
+    <h2>Ajax updated</h2>
+    <p>I'v been updated through AJAX call</p>
+    <p>The current time is: <strong>${currentTime}</strong></p>
+</t:block> -->
+
+</html>
